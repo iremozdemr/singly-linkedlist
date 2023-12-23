@@ -37,5 +37,42 @@ public class Main {
 
         // displaying the list after removing element at index 1
         System.out.println("list elements after removing index 1: " + myList.toString());
+
+        SinglyLinkedList<Integer> list1 = new SinglyLinkedList<>();
+        SinglyLinkedList<Integer> list2 = new SinglyLinkedList<>();
+        SinglyLinkedList<Integer> list3 = new SinglyLinkedList<>();
+
+        // populating the lists
+        list1.addLast(1);
+        list1.addLast(2);
+        list1.addLast(3);
+
+        list2.addLast(1);
+        list2.addLast(2);
+        list2.addLast(3);
+
+        list3.addLast(1);
+        list3.addLast(2);
+        list3.addLast(4);
+
+        // testing equals method
+        System.out.println("list1.equals(list2): " + list1.equals(list2)); // Should print true
+        System.out.println("list1.equals(list3): " + list1.equals(list3)); // Should print false
+
+        SinglyLinkedList<Integer> originalList = new SinglyLinkedList<>();
+        originalList.addLast(1);
+        originalList.addLast(2);
+        originalList.addLast(3);
+
+        try {
+            SinglyLinkedList<Integer> clonedList = originalList.clone();
+            
+            System.out.println("original List: " + originalList);
+            System.out.println("cloned List: " + clonedList);
+
+            System.out.println("original list equals cloned list: " + originalList.equals(clonedList));
+        } catch (CloneNotSupportedException e) {
+            System.out.println("clone not supported for this object");
+        }
     }
 }
