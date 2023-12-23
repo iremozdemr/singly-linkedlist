@@ -1,11 +1,11 @@
-public class SinglyLinkedList<E>{
+public class SinglyLinkedList<E> implements Cloneable{
 
     //-----nested node class-----
     private class Node<E>{
         private E data; // data of the node
         private Node<E> next; // reference to the next node
 
-        // Node constructor
+        // node constructor
         public Node(E data, Node<E> next){
             this.data = data;
             this.next = next;
@@ -162,5 +162,46 @@ public class SinglyLinkedList<E>{
             string = string + " " + tail.data; // appends the last node's data
             return string; // returns the string representation of the list
         }
+    }
+
+    public boolean equals(SinglyLinkedList list){
+        if(list == null){
+            return false;
+        }
+        if(this.getClass() != list.getClass()){
+            return false;
+        }
+        if(this.size != list.size){
+            return false;
+        }
+        Node<E> temp1 = this.head;
+        Node<E> temp2 = list.head;
+        while(temp1 != null && temp2 != null){
+            if(temp1.data.equals(temp2.data) == false){
+                return false;
+            }
+            temp1 = temp1.next;
+            temp2 = temp2.next;
+        }
+        return true;
+    }
+
+    public SinglyLinkedList<E> clone() throws CloneNotSupportedException{
+        SinglyLinkedList<E> list = (SinglyLinkedList<E>)super.clone();
+        if(this.isEmpty() == false){
+            Node<E> newHead = new Node<E>(this.head.data,null);
+            Node<E> newTail = new Node<E>(this.tail.data,null);
+            list.head = newHead;
+            list.tail = newTail;
+            Node<E> temp1 = head.next;
+            Node<E> temp2 = newHead;
+            while(temp1 != null){
+                Node<E> newNode = new Node<E>(temp1.data,null);
+                temp2.next = newNode;
+                temp1 = temp1.next;
+                temp2 = temp2.next;
+            }
+        }
+        return list;
     }
 }
